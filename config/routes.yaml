@@ -28,7 +28,7 @@ product_creation:
 
 category_edit:
     path: /editar-categoria/{id}
-    controller: App\Controller\categoryController::edit          
+    controller: App\Controller\CategoryController::edit          
 
 
 product_edit:
@@ -41,7 +41,11 @@ product_delete:
 
 category_delete:
     path: /borrar/categoria/{id}
-    controller: App\Controller\CategoryController::delete        
+    controller: App\Controller\CategoryController::delete
+
+category_status:
+    path: /staus/categoria/{id}
+    controller: App\Controller\CategoryController::status
 
 register:
     path: /registro

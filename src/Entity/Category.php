@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayColecction;
-use Doctrine\Common\Collections\Colecction;
+use Doctrine\Common\Collections\Colecction;//  Permite devolver una array de objetos
 use Doctrine\ORM\Mapping as ORM;
 
 

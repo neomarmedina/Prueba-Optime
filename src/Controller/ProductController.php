@@ -28,7 +28,7 @@ class ProductController extends AbstractController
 
         $products= $product_repo->findBy([], ['id'=>'DESC']); //Aqui obtengo todos Los 
         
-    //Aqui sacaré todos los prodictos que hay adjunto a cada acategoria
+    //Aqui sacaré todos los productos que hay adjunto a cada a categoria
 
         return $this->render('product/index.html.twig', [
             'products' => $products,

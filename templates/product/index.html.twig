@@ -12,35 +12,68 @@
 
     	<tr>
     			<th>Nombre</th>
-    			<th>Código</th>
-    			<th>Descripción</th>
-    			<th>Precio</th>
+    			<th>COD</th>
+    			<th>Desc.</th>
+                <th>Marca</th>
+    			<th>Prec.</th>
     			<th>Acciones</th>   			
 
     	 </tr>
 
     	 {% for products in products %}
+            
+                {% if products.category.activo ==1 %}                        
 
-    	 	<tr>
-    			<td>{{ products.name }}</td>
-    			<td>{{ products.code}}</td>
-    			<td>{{ products.description}}</td>
-    			<td>{{ products.precio}}</td>
-    			
-    			<td width="100%" class="buttons">
+            	 	<tr>
+            			<td>{{ products.name }}</td>
+            			<td>{{ products.code}}</td>
+            			<td><textarea disabled cols="5" rows="5">{{ products.description}}</textarea></td>
+            			<td>{{ products.brand}}</td>
+                        <td>{{ products.precio}}</td>
+            			
+            			<td width="100%" class="buttons">
 
-    				<a href="{{path('product_detail', {'id':products.id}) }}" class="btn-show">Ver</a>
-    				<a  href="{{path('product_edit', {'id':products.id}) }}" class="btn-edit">Editar</a>
-    				<a href="{{path('product_delete', {'id':products.id}) }}" class="btn-delete">Borrar</a>
+            				<a href="{{path('product_detail', {'id':products.id}) }}" class="btn-show">Ver</a>
+            				<a  href="{{path('product_edit', {'id':products.id}) }}" class="btn-edit">Edit.</a>
+            				<a href="{{path('product_delete', {'id':products.id}) }}" class="btn-delete" onclick = "mensaje()" >Borr.</a> 
 
-    			</td>
-    			
-    	 </tr>
-
+            			</td>
+            	 		
+            	     </tr>
+                {% endif %}            
 
     	 {% endfor %}
 
     </table>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" > </script >
+    <script type="text/javascript">
+
+  
+        function mensaje()
+        {
+
+            swal({
+              title: "Estas seguro?",
+              text: "Una vez eliminado, ¡no podras recuperar este Registro",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                swal("Poof! Tu Registro imaginario ha sido eliminado!", {
+                  icon: "success",
+                });
+              } else {
+                swal("Tu Registro esta seguro!");
+              }
+            });
+        
+        }    
+
+        
+    </script>
 
    
 </div>

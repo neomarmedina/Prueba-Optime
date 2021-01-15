@@ -13,63 +13,82 @@
     	<tr>
     			<th>Nombre</th>
     			<th>Código</th>
-    			<th>Descripción</th>
+    			<th>Desc.</th>
                 <th>Acciones</th>
+                <th>Estatus</th>
     			  			
 
     	 </tr>
 
     	 {% for categories in categories %}
 
-    	 	<tr>
-    			<td>{{ categories.name }}</td>
-    			<td>{{ categories.code}}</td>
-    			<td><textarea disabled>{{ categories.description}}</textarea></td>
-    			
-    			
-    			<td width="400%" class="buttons">
+    	 	<tr>           
+                    
+                    <td>{{ categories.name }}</td>
+                    <td>{{ categories.code}}</td>
+                    <td><textarea disabled cols="8 rows="3">{{   categories.description}}</textarea></td>                        
 
-    				<a href="{{path('category_detail', {'id':categories.id}) }}" class="btn-show">Ver</a>
-                    <a  href="{{path('category_edit', {'id':categories.id}) }}" class="btn-edit">Edit.</a>
-                    <a href="{{path('category_delete', {'id':categories.id}) }}" class="btn-delete">Borrar</a>
-                    <a href="" class="btn-status">
+                			
+        			<td width="600%" class="buttons">
+
+        				<a href="{{path('category_detail', {'id':categories.id}) }}" class="btn-show">Ver</a>
+                        <a  href="{{path('category_edit', {'id':categories.id}) }}" class="btn-edit">Edit.</a>
+                        <a href="{{path('category_delete', {'id':categories.id}) }}" class="btn-delete" onclick = "mensajecat()">Borrar</a>
+                      
+                        </a>
+                   </td>                         
+                   
+                   <td class="buttons">
+                          <a href="{{path('category_status', {'id':categories.id}) }}" class="btn-status" >
 
 
-                    {% if categories.activo ==1 %}                 
-                    {{ 'Act.' }}
+                        {% if categories.activo ==1 %}                 
+                        {{ 'Act.' }}
 
-                    {% endif %}
-                    {% if categories.activo ==0 %}                 
-                    {{ 'Off.' }}
+                        {% endif %}
+                        {% if categories.activo ==0 %}                 
+                        {{ 'Off' }}
 
-                    {% endif %}
+                        {% endif %}
 
-                    </a>                    
-
-    	 </tr>
+                   </td>        	   
+         </tr>
 
 
     	 {% endfor %}
 
     </table>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" > </script >
+    <script type="text/javascript">
+
+  
+        function mensajecat()
+        {
+
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this imaginary file!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                });
+              } else {
+                swal("Your imaginary file is safe!");
+            }
+            });
+        
+        }    
+        
+    </script>
+
    
 </div>
 {% endblock %}
 
-    {% block javascripts %}
-      
-        function alerta()
-    {
-    var mensaje;
-    var opcion = confirm("Clicka en Aceptar o Cancelar");
-    if (opcion == true) {
-        mensaje = "Has clickado OK";
-    } else {
-        mensaje = "Has clickado Cancelar";
-    }
-    document.getElementById("ejemplo").innerHTML = mensaje;
-}
-
-
-    {% endblock %}
+    

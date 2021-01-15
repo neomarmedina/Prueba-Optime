@@ -43,6 +43,13 @@ class Product
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="brand", type="string", length=255, nullable=false)
+     */
+    private $brand;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="precio", type="float", precision=10, scale=0, nullable=false)
@@ -99,6 +106,18 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

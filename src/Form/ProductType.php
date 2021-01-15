@@ -25,41 +25,44 @@ class ProductType  extends AbstractType{
 	{
 
 		// Aqui me traigo los datos de la tabla category
-
+		//Aca tambien hago las validaciones de los campos
 
 		$builder->add('code', TextType::class, array(
-				'label'=> 'Codigo'
+				'label'=> 'Codigo','required' =>true
 
 			))
 
 			->add('name', TextType::class, array(
-				'label'=> 'Nombre'
-
+				'label'=> 'Nombre','required' =>true
 			))
 
 			->add('description', TextareaType::class, array(
-				'label'=> 'Descripción'
+				'label'=> 'Descripción','required' =>true
+
+			))
+
+			->add('brand', TextType::class, array(
+				'label'=> 'Marca','required' =>true,
 
 			))	
 
 			->add('precio', TextType::class, array(
-				'label'=> 'precio'
+				'label'=> 'precio','required' =>true
 
 			))	
-
 
 			->add('category', EntityType::class, array(
 				'class' => 'App:Category',
 				'query_builder' => function (EntityRepository $er) {
 					return $er->createQueryBuilder('u')
-						->orderBy('u.name', 'ASC');
+					    ->where('u.activo = :activo')
+						->orderBy('u.name', 'ASC')
+					    ->setParameter('activo', 1);
 				},
 				'choice_label' => 'name'					
 
-			))	
-		
-		
-
+			))		
+			
 
 			->add('submit', SubmitType::class, array(
 				'label'=> '...Crear...'

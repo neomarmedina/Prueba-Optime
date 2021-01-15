@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Category;
 use App\Form\RegisterType;
+use Doctrine\ORM\EntityManagerInterface;// test
 
 
 class CategoryController extends AbstractController
@@ -141,6 +142,35 @@ class CategoryController extends AbstractController
                    return $this->redirect($this->generateUrl('categories'));
 
 
+           }
+
+           //Aqui creo la función para cambiar estatus de Categorías
+
+           public function status(category $category)
+           {
+                $entityManager = $this->getDoctrine()->getManager();
+
+
+                //Aca le doy (seteo) un nuevo valor al campo activo
+
+                $category = $entityManager->getRepository("App:Category")->find($category->getId());
+
+                if ($category->getActivo() == 1) {
+                    
+                        $category->setActivo(0);
+
+                }
+                elseif($category->getActivo() == 0) {
+
+                        $category->setActivo(1);  
+
+                    }
+
+                $entityManager->persist($category);
+                $entityManager->flush(); 
+               
+                return $this->redirect($this->generateUrl('categories'));
+                
            }
    
 

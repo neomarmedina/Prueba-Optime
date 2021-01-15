@@ -18,17 +18,17 @@ class RegisterType  extends AbstractType{
 	{
 			
 		$builder->add('code', TextType::class, array(
-			'label'=> 'Codigo'
+			'label'=> 'Codigo','required' =>true
 
 		))
 
 		->add('name', TextType::class, array(
-			'label'=> 'Nombre'
+			'label'=> 'Nombre','required' =>true
 
 		))
 
 		->add('description', TextType::class, array(
-			'label'=> 'Descripción'
+			'label'=> 'Descripción','required' =>true
 
 		))		
 

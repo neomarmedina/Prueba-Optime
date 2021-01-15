@@ -1,0 +1,28 @@
+# config/validator/validation.yaml
+App\Entity\Product:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: code
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+
+    properties:      
+        code:
+            - Length:
+                min: 4
+                max: 10
+                minMessage: 'El codigo debe tener como minimo {{ limit }} caracteres'
+                maxMessage: 'El codigo no puede tener mas de {{ limit }} caracteres'   
+        name:
+            - Length:
+                min: 4
+                minMessage: 'El nombre debe tener como minimo {{ limit }} caracteres'
+                
+App\Entity\Category :
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: code
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+
+    properties:         
+        name:
+            - Length:
+                min: 2
+                minMessage: 'El nombre debe tener como minimo {{ limit }} caracteres'
